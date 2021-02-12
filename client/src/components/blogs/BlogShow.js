@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBlog } from '../../actions';
+import { fetchBlog, deleteBlog } from '../../actions';
 
 class BlogShow extends Component {
   componentDidMount() {
     this.props.fetchBlog(this.props.match.params._id);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.deleteBlog(this.props.match.params._id, this.props.history);
+  }
+
+  renderButtons() {
+
+    return (
+      <div>
+        <button className="green btn-flat right white-text">
+          Delete
+          <i className="material-icons right">delete</i>
+        </button>
+      </div>
+    );
   }
 
   render() {
@@ -18,6 +35,12 @@ class BlogShow extends Component {
       <div>
         <h3>{title}</h3>
         <p>{content}</p>
+        <form onSubmit={this.onSubmit.bind(this)}>
+        <h5>Please confirm your entries</h5>
+        {/* {this.renderFields()} */}
+
+        {this.renderButtons()}
+      </form>
       </div>
     );
   }
@@ -27,4 +50,4 @@ function mapStateToProps({ blogs }, ownProps) {
   return { blog: blogs[ownProps.match.params._id] };
 }
 
-export default connect(mapStateToProps, { fetchBlog })(BlogShow);
+export default connect(mapStateToProps, { fetchBlog, deleteBlog })(BlogShow);
