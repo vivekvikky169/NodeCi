@@ -2,9 +2,9 @@ language: node_js
 node_js: 
   -"8"
 dist: trusty
-servies:
+services:
   - mongodb
-  - redis-server
+  - redis
 env:
   - NODE_ENV=ci PORT=3000
 cache:
