@@ -11,8 +11,6 @@ afterEach(async () => {
     await page.close();
 })
 
-
-
 test('check header has correct text', async () => {
     // const text = await page.$eval('a.brand-logo', el => el.innerHTML);
 
